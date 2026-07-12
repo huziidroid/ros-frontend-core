@@ -1,0 +1,16 @@
+{
+  "name": "@ros/web",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "tags": [
+      "type:app",
+      "platform:web"
+    ]
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "6.30.3"
+  }
+}
