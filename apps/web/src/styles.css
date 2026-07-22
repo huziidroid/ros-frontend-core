@@ -1,3 +1,9 @@
 @import 'tailwindcss';
+@import '@ros/ui-web/globals.css';
+
+/* Tailwind compiles CSS only here (the app). Scan the web libraries' source so
+ * their utility classes aren't purged. Paths are relative to this file. */
+@source '../../../packages/ui-web/src';
+@source '../../../packages/components-web/src';
 
 /* You can add global styles to this file, and also import other style files */

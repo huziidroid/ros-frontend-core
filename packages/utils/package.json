@@ -38,6 +38,7 @@
     ]
   },
   "dependencies": {
-    "@swc/helpers": "~0.5.18"
+    "@swc/helpers": "~0.5.18",
+    "zod": "^4.4.3"
   }
 }

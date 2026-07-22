@@ -9,8 +9,16 @@
     ]
   },
   "dependencies": {
+    "@ros/api": "workspace:*",
+    "@ros/components-web": "workspace:*",
+    "@ros/core": "workspace:*",
+    "@ros/utils": "workspace:*",
+    "@ros/types": "workspace:*",
+    "@ros/ui-web": "workspace:*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "6.30.3"
+    "react-router-dom": "6.30.3",
+    "sonner": "^2.0.7",
+    "zustand": "^5.0.0"
   }
 }

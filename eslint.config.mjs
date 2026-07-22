@@ -1,4 +1,5 @@
 import nx from '@nx/eslint-plugin';
+import importPlugin from 'eslint-plugin-import';
 
 export default [
   ...nx.configs['flat/base'],
@@ -24,32 +25,8 @@ export default [
               onlyDependOnLibsWithTags: ['type:ui', 'type:util', 'type:types'],
             },
             {
-              sourceTag: 'type:feature',
-              onlyDependOnLibsWithTags: [
-                'type:feature',
-                'type:ui',
-                'type:core',
-                'type:api',
-                'type:util',
-                'type:types',
-              ],
-            },
-            {
-              sourceTag: 'type:core',
-              onlyDependOnLibsWithTags: [
-                'type:core',
-                'type:util',
-                'type:types',
-              ],
-            },
-            {
               sourceTag: 'type:api',
-              onlyDependOnLibsWithTags: [
-                'type:api',
-                'type:core',
-                'type:util',
-                'type:types',
-              ],
+              onlyDependOnLibsWithTags: ['type:api', 'type:util', 'type:types'],
             },
             {
               sourceTag: 'type:util',
@@ -96,7 +73,21 @@ export default [
       '**/*.cjs',
       '**/*.mjs',
     ],
+    plugins: { import: importPlugin },
     // Override or add rules here
-    rules: {},
+    rules: {
+      // Package and alias imports (e.g. `react`, `@ros/*`) go first, then
+      // relative path imports (`./`, `../`), with one blank line between.
+      'import/order': [
+        'error',
+        {
+          groups: [
+            ['builtin', 'external', 'internal'],
+            ['parent', 'sibling', 'index'],
+          ],
+          'newlines-between': 'always',
+        },
+      ],
+    },
   },
 ];

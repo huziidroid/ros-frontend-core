@@ -16,11 +16,20 @@
   },
   "nx": {
     "tags": [
-      "type:feature",
       "platform:web"
     ]
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
+    "@ros/api": "workspace:*",
+    "@ros/core": "workspace:*",
+    "@ros/types": "workspace:*",
+    "@ros/ui-web": "workspace:*",
+    "@ros/utils": "workspace:*",
+    "react-hook-form": "^7.82.0",
+    "zod": "^4.4.3"
+  },
+  "peerDependencies": {
     "react": "^19.0.0"
   }
 }
