@@ -1,7 +1,8 @@
 packages:
-  - 'apps/*'
-  - 'packages/*'
-allowBuilds:
-  '@swc/core': true
-  nx: true
-  unrs-resolver: true
+  - apps/*
+  - packages/*
+
+onlyBuiltDependencies:
+  - '@swc/core'
+  - nx
+  - unrs-resolver
