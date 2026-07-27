@@ -1,5 +1,6 @@
 import nx from '@nx/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
+import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
 export default [
   ...nx.configs['flat/base'],
@@ -90,4 +91,7 @@ export default [
       ],
     },
   },
+  // Must be last: disables any ESLint rules that conflict with Prettier so the
+  // two don't fight over formatting.
+  eslintConfigPrettier,
 ];

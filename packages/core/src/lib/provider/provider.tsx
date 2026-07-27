@@ -59,16 +59,18 @@ export function AppCoreProvider({
   // Bootstrap-only. Constructed + init'd here, never placed on the context.
   const [ready, setReady] = useState(false);
   useEffect(() => {
+    let active = true;
     const handler = new AuthenticationHandler({
       iamApiClient: apiService.iamApiClient,
       storageService: storageService,
     });
-    let active = true;
+
     handler.init().finally(() => {
       if (active) setReady(true);
     });
     return () => {
       active = false;
+      handler.dispose();
     };
   }, [apiService, storageService]);
 

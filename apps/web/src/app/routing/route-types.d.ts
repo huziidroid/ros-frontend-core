@@ -1,4 +1,4 @@
-/** App route registry. Add an entry here per route defined in `./routes.ts`. */
+/** Route parameter shapes, keyed by route name. */
 export {};
 
 declare module '@ros/types' {

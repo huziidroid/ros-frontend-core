@@ -9,4 +9,10 @@ export const API_HOST: string =
   (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(
     /\/+$/,
     '',
-  ) ?? 'http://localhost:8000';
+  ) ?? 'http://localhost:8000/api/v1';
+
+export const PLATFORM_NAME: string =
+  (import.meta.env.VITE_PLATFORM_NAME as string | undefined)?.replace(
+    /\/+$/,
+    '',
+  ) ?? 'Retail OS';

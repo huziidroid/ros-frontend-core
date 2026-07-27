@@ -1,14 +1,11 @@
-/**
- * Shared auth validation schemas — platform-agnostic so web and native forms
- * validate against the exact same rules instead of drifting apart.
- */
+/** Auth form validation schemas, shared across platforms. */
 import { z } from 'zod';
 
-import { E164_PATTERN } from '../phone/phone-number.js';
+import { isValidPhone } from '../phone/phone-number.js';
 
 export const phoneNumberSchema = z
   .string()
-  .regex(E164_PATTERN, 'Enter a valid WhatsApp number, e.g. +923001234567.');
+  .refine(isValidPhone, 'Enter a valid WhatsApp number, e.g. +923001234567.');
 
 export const loginSchema = z.object({
   phone_number: phoneNumberSchema,
@@ -22,3 +19,16 @@ export const registerSchema = z.object({
   phone_number: phoneNumberSchema,
 });
 export type RegisterFormValues = z.infer<typeof registerSchema>;
+
+/** Length of the OTP code entered on the verification screen. */
+export const OTP_CODE_LENGTH = 6;
+
+export const otpSchema = z.object({
+  code: z
+    .string()
+    .regex(
+      new RegExp(`^\\d{${OTP_CODE_LENGTH}}$`),
+      `Enter the ${OTP_CODE_LENGTH}-digit code sent to you.`,
+    ),
+});
+export type OtpFormValues = z.infer<typeof otpSchema>;

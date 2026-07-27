@@ -1,15 +1,17 @@
 /**
- * Formats a WhatsApp/phone number as the user types (spaced groups) while
- * keeping the underlying field value a clean E.164 string.
+ * Phone number input: shows the value in spaced groups as the user types while
+ * emitting a clean E.164 string.
  */
 import { forwardRef } from 'react';
 import type { ChangeEvent, ComponentProps } from 'react';
 import { formatPhoneNumber, toE164 } from '@ros/utils';
 
-import { Input } from './ui/input';
+import { Input } from '../input/input';
 
-export interface PhoneInputProps
-  extends Omit<ComponentProps<typeof Input>, 'value' | 'onChange' | 'type'> {
+export interface PhoneInputProps extends Omit<
+  ComponentProps<typeof Input>,
+  'value' | 'onChange' | 'type'
+> {
   value?: string;
   onChange?: (value: string) => void;
 }

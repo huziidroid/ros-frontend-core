@@ -2,7 +2,7 @@
 import type { NavigateFunction } from 'react-router-dom';
 import type { NavigationService, RootParamList, RouteArgs } from '@ros/types';
 
-import { buildPath } from '../config/routes';
+import { buildPath } from '../routing/routes';
 
 export class WebNavigationService implements NavigationService {
   constructor(private readonly routerNavigate: NavigateFunction) {}

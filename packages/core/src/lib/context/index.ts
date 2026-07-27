@@ -26,6 +26,7 @@ export interface IContextState {
   navigationService: NavigationService;
   alertService: AlertService;
   apiService: APIClient;
+  platformName: string;
 }
 
 export const AppCoreContext = createContext<IContextState | null>(null);

@@ -1,22 +1,17 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAppCoreContext } from '@ros/core';
 import { OtpForm } from '@ros/components-web';
-import { AuthLayout } from '@ros/ui-web';
 import type { RootParamList } from '@ros/types';
 
-export function OtpRoute() {
+import { AuthLayout } from '../../layouts/auth-layout';
+
+export function OtpPage() {
   const { navigationService } = useAppCoreContext();
   const location = useLocation();
   const params = location.state as RootParamList['Otp'] | null;
 
-  useEffect(() => {
-    // No context to verify against (e.g. a direct link/refresh) — bounce back
-    // to the start of the flow rather than rendering a broken screen.
-    if (!params) navigationService.replace('Login');
-  }, [params, navigationService]);
-
-  if (!params) return null;
+  // Redirect to the start of the flow when opened without navigation state.
+  if (!params) return <Navigate to="/login" replace />;
 
   return (
     <AuthLayout
@@ -41,4 +36,4 @@ export function OtpRoute() {
   );
 }
 
-export default OtpRoute;
+export default OtpPage;

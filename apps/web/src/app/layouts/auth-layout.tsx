@@ -1,19 +1,17 @@
 /**
- * Shared page chrome for auth screens (login/register/otp): centered card,
- * optional back action, optional footer (e.g. "New here? Register").
- * Hand-authored composition, not a shadcn primitive — lives outside `ui/`.
+ * Page chrome for the auth screens (login/register/otp): a centered card with
+ * an optional back action and footer.
  */
 import type { ReactNode } from 'react';
-import { ArrowLeft } from 'lucide-react';
-
-import { Button } from './ui/button';
 import {
+  ArrowLeft,
+  Button,
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from './ui/card';
+} from '@ros/ui-web';
 
 export interface AuthLayoutProps {
   title: string;

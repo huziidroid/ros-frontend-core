@@ -25,11 +25,11 @@
     "@ros/core": "workspace:*",
     "@ros/types": "workspace:*",
     "@ros/ui-web": "workspace:*",
-    "@ros/utils": "workspace:*",
-    "react-hook-form": "^7.82.0",
-    "zod": "^4.4.3"
+    "@ros/utils": "workspace:*"
   },
   "peerDependencies": {
-    "react": "^19.0.0"
+    "react": "^19.0.0",
+    "react-hook-form": "^7.82.0",
+    "zod": "^4.4.3"
   }
 }

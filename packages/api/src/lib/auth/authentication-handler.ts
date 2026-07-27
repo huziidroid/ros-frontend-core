@@ -22,13 +22,17 @@ export interface AuthenticationHandlerDeps {
 export class AuthenticationHandler {
   constructor(private readonly deps: AuthenticationHandlerDeps) {}
 
+  private unsubscribe?: () => void;
+  private disposed = false;
+
   /**
    * Restore a persisted session on app start, then keep storage in sync.
    *
    * Hydrates tokens from storage and loads the current user via `GET /auth/me`.
    * If either step fails, the session is cleared (no user = logged out).
    * Subscribes so every later token change is persisted. Safe to `await` before
-   * rendering auth-dependent routes.
+   * rendering auth-dependent routes. Call `dispose()` to tear the subscription
+   * down.
    */
   async init(): Promise<void> {
     const { iamApiClient, storageService } = this.deps;
@@ -49,13 +53,24 @@ export class AuthenticationHandler {
       }
     }
 
-    authStore.subscribe((state) => {
+    // `dispose()` may have run while the awaits above were pending; if so, skip
+    // subscribing so we don't leak a listener past teardown.
+    if (this.disposed) return;
+
+    this.unsubscribe = authStore.subscribe((state) => {
       void this.persist(
         this.deps.storageService,
         state.accessToken,
         state.refreshToken,
       );
     });
+  }
+
+  /** Tear down the token-persistence subscription. Safe to call more than once. */
+  dispose(): void {
+    this.disposed = true;
+    this.unsubscribe?.();
+    this.unsubscribe = undefined;
   }
 
   /** Mirror the current token pair into (or out of) durable storage. */

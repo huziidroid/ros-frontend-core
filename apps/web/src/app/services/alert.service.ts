@@ -6,6 +6,7 @@ import {
   type AlertId,
   type AlertRequest,
   type AlertService,
+  AlertActionStyle,
 } from '@ros/types';
 
 function toSonnerAction(action?: AlertAction) {
@@ -17,7 +18,7 @@ function toSonnerAction(action?: AlertAction) {
 // the first 'cancel'-styled action maps to sonner's cancel slot, the first
 // remaining action maps to its single action slot.
 function pickActions(actions: AlertAction[] = []) {
-  const cancelAction = actions.find((a) => a.style === 'cancel');
+  const cancelAction = actions.find((a) => a.style === AlertActionStyle.Cancel);
   const primaryAction = actions.find((a) => a !== cancelAction);
   return { cancelAction, primaryAction };
 }

@@ -5,17 +5,7 @@
  */
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-  Input,
-  PhoneInput,
-  Button,
-} from '@ros/ui-web';
+import { Form, FormInput, PhoneFormInput, Button } from '@ros/ui-web';
 import { useRequestOtp } from '@ros/core';
 import { registerSchema, type RegisterFormValues } from '@ros/utils';
 
@@ -43,63 +33,31 @@ export function RegisterForm({ onRequested }: RegisterFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
-        <FormField
-          control={form.control}
+        <FormInput
           name="business_name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Business name</FormLabel>
-              <FormControl>
-                <Input className="h-11 rounded-lg text-base" placeholder="Rana Traders" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          label="Business name"
+          className="h-11 rounded-lg text-base"
+          placeholder="Rana Traders"
         />
         <div className="grid grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
+          <FormInput
             name="first_name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>First name</FormLabel>
-                <FormControl>
-                  <Input className="h-11 rounded-lg text-base" placeholder="Rana" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label="First name"
+            className="h-11 rounded-lg text-base"
+            placeholder="Rana"
           />
-          <FormField
-            control={form.control}
+          <FormInput
             name="last_name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Last name</FormLabel>
-                <FormControl>
-                  <Input className="h-11 rounded-lg text-base" placeholder="Ahmed" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label="Last name"
+            className="h-11 rounded-lg text-base"
+            placeholder="Ahmed"
           />
         </div>
-        <FormField
-          control={form.control}
+        <PhoneFormInput
           name="phone_number"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>WhatsApp number</FormLabel>
-              <FormControl>
-                <PhoneInput
-                  className="h-11 rounded-lg text-base"
-                  placeholder="+92 300 000 0000"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          label="WhatsApp number"
+          className="h-11 rounded-lg text-base"
+          placeholder="+92 300 000 0000"
         />
         <Button
           type="submit"

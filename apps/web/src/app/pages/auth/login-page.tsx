@@ -1,17 +1,11 @@
-import { useEffect } from 'react';
 import { useAppCoreContext } from '@ros/core';
 import { LoginForm } from '@ros/components-web';
-import { AuthLayout, Button } from '@ros/ui-web';
+import { Button } from '@ros/ui-web';
 
-export function LoginRoute() {
-  const { accountInfo, navigationService } = useAppCoreContext();
+import { AuthLayout } from '../../layouts/auth-layout';
 
-  useEffect(() => {
-    // Already signed in — no reason to see the login screen.
-    if (accountInfo.user) navigationService.replace('Home');
-  }, [accountInfo.user, navigationService]);
-
-  if (accountInfo.user) return null;
+export function LoginPage() {
+  const { navigationService, platformName } = useAppCoreContext();
 
   return (
     <AuthLayout
@@ -19,7 +13,7 @@ export function LoginRoute() {
       description="Enter your registered WhatsApp number to get a login code."
       footer={
         <p className="text-center text-sm text-muted-foreground">
-          New to RetailOS?{' '}
+          New to {platformName}?{' '}
           <Button
             type="button"
             variant="link"
@@ -40,4 +34,4 @@ export function LoginRoute() {
   );
 }
 
-export default LoginRoute;
+export default LoginPage;

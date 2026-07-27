@@ -4,16 +4,7 @@
  */
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-  PhoneInput,
-  Button,
-} from '@ros/ui-web';
+import { Form, PhoneFormInput, Button } from '@ros/ui-web';
 import { useRequestOtp } from '@ros/core';
 import { loginSchema, type LoginFormValues } from '@ros/utils';
 
@@ -22,11 +13,12 @@ export interface LoginFormProps {
 }
 
 export function LoginForm({ onRequested }: LoginFormProps) {
+  const requestOtp = useRequestOtp();
+
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: { phone_number: '' },
   });
-  const requestOtp = useRequestOtp();
 
   const onSubmit = form.handleSubmit(async (values) => {
     await requestOtp.mutateAsync(values);
@@ -36,22 +28,11 @@ export function LoginForm({ onRequested }: LoginFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
-        <FormField
-          control={form.control}
+        <PhoneFormInput
           name="phone_number"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>WhatsApp number</FormLabel>
-              <FormControl>
-                <PhoneInput
-                  className="h-11 rounded-lg text-base"
-                  placeholder="+92 300 000 0000"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          label="WhatsApp number"
+          className="h-11 rounded-lg text-base"
+          placeholder="+92 300 000 0000"
         />
         <Button
           type="submit"
@@ -61,6 +42,7 @@ export function LoginForm({ onRequested }: LoginFormProps) {
         >
           {requestOtp.isPending ? 'Sending code…' : 'Send code'}
         </Button>
+
         {requestOtp.isError && (
           <p className="text-sm text-destructive">
             Couldn't send a code. Check the number and try again.
