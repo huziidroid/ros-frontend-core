@@ -7,7 +7,9 @@
     "lint": "nx run-many -t lint",
     "typecheck": "nx run-many -t typecheck",
     "test": "nx run-many -t test",
-    "dev:web": "nx run @ros/web:dev"
+    "start:web": "nx run @ros/web:dev",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "private": true,
   "devDependencies": {
@@ -54,5 +56,10 @@
     "vite": "^8.0.0",
     "vite-plugin-dts": "~4.5.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-hook-form": "^7.82.0",
+    "zod": "^4.4.3",
+    "zustand": "^5.0.0"
+  }
 }

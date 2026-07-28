@@ -38,6 +38,10 @@
     ]
   },
   "dependencies": {
-    "@swc/helpers": "~0.5.18"
+    "@swc/helpers": "~0.5.18",
+    "libphonenumber-js": "^1.13.9"
+  },
+  "peerDependencies": {
+    "zod": "^4.4.3"
   }
 }
